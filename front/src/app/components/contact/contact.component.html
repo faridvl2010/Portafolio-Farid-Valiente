@@ -1,0 +1,113 @@
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">get_in_touch</p>
+      <h2>Contacto</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <div class="info-terminal card">
+          <div class="terminal-bar mono">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="tbar-title">contact.sh</span>
+          </div>
+          <div class="terminal-body mono">
+            <p><span class="text-green">$</span> cat README.md</p>
+            <br>
+            <p class="text-muted">// ¿Tienes un proyecto en mente?</p>
+            <p class="text-muted">// ¿Quieres colaborar o contratar?</p>
+            <p class="text-muted">// Escríbeme, estoy disponible.</p>
+            <br>
+            <p><span class="text-cyan">email</span>    : farid.valiente&#64;uptc.edu.co</p>
+            <p><span class="text-cyan">location</span> : Colombia 🇨🇴</p>
+            <p><span class="text-cyan">status</span>   : <span class="text-green">open to work ✓</span></p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          @for (s of socials; track s.label) {
+            <a [href]="s.url" target="_blank" class="social-btn card">
+              <i [class]="s.icon"></i>
+              <span>{{ s.label }}</span>
+              <i class="fas fa-arrow-right arrow"></i>
+            </a>
+          }
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        @if (!submitted()) {
+          <form class="contact-form card" (ngSubmit)="onSubmit()" #f="ngForm">
+            <h3 class="form-title mono">
+              <span class="text-green">&#47;&#47;</span> Enviar mensaje
+            </h3>
+
+            <div class="form-group">
+              <label class="form-label mono" for="name">name<span class="text-green">*</span></label>
+              <input
+                id="name" name="name" type="text"
+                class="form-input"
+                placeholder="Tu nombre completo"
+                [(ngModel)]="form.name" required
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label mono" for="email">email<span class="text-green">*</span></label>
+              <input
+                id="email" name="email" type="email"
+                class="form-input"
+                placeholder="tu@email.com"
+                [(ngModel)]="form.email" required
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label mono" for="subject">subject</label>
+              <input
+                id="subject" name="subject" type="text"
+                class="form-input"
+                placeholder="Asunto del mensaje"
+                [(ngModel)]="form.subject"
+              >
+            </div>
+
+            <div class="form-group">
+              <label class="form-label mono" for="message">message<span class="text-green">*</span></label>
+              <textarea
+                id="message" name="message"
+                class="form-input"
+                rows="5"
+                placeholder="Escribe tu mensaje aquí..."
+                [(ngModel)]="form.message" required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary submit-btn" [disabled]="sending()">
+              @if (sending()) {
+                <i class="fas fa-circle-notch fa-spin"></i> Enviando...
+              } @else {
+                <i class="fas fa-paper-plane"></i> Enviar Mensaje
+              }
+            </button>
+          </form>
+        } @else {
+          <div class="success-card card">
+            <div class="success-icon text-green">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="mono text-green">Mensaje enviado</h3>
+            <p class="text-secondary">Gracias por contactarme. Te responderé pronto.</p>
+            <button class="btn btn-ghost" (click)="resetForm()">
+              <i class="fas fa-redo"></i> Nuevo mensaje
+            </button>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+<section id="hero" class="hero">
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="container hero-content">
+    <div class="terminal-header mono">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span class="terminal-title">farid&#64;portfolio:~$</span>
+    </div>
+
+    <div class="hero-text">
+      <p class="hero-greeting mono text-muted">// Bienvenido a mi portafolio</p>
+
+      <h1 class="hero-name">
+        @if (profile()) {
+          {{ profile()!.name }}
+        } @else {
+          Farid Valiente
+        }
+      </h1>
+
+      <h2 class="hero-role">
+        <span class="text-green">&gt;_ </span>
+        <span class="typed-text">{{ typedText() }}</span>
+        <span class="cursor" [class.visible]="showCursor()">|</span>
+      </h2>
+
+      <p class="hero-desc">
+        @if (profile()) {
+          {{ profile()!.bio[0] }}
+        } @else {
+          Construyendo soluciones tecnológicas robustas y escalables.
+        }
+      </p>
+
+      <div class="hero-location mono text-muted" *ngIf="profile()">
+        <i class="fas fa-map-marker-alt text-green"></i>
+        {{ profile()!.location }}
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" (click)="scrollTo('#projects')">
+          <i class="fas fa-code"></i> Ver Proyectos
+        </button>
+        <button class="btn btn-outline" (click)="scrollTo('#contact')">
+          <i class="fas fa-terminal"></i> Contactar
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-code-block mono">
+      <pre><code><span class="kw">const</span> <span class="var">developer</span> = &#123;
+  <span class="key">name</span>:     <span class="str">"Farid Valiente"</span>,
+  <span class="key">role</span>:     <span class="str">"Ing. Sistemas"</span>,
+  <span class="key">stack</span>:    [<span class="str">"Angular"</span>, <span class="str">"Node.js"</span>],
+  <span class="key">passion</span>: <span class="str">"Clean Code"</span>,
+  <span class="key">status</span>:  <span class="bool">true</span> <span class="cm">// available</span>
+&#125;;</code></pre>
+    </div>
+  </div>
+
+  <div class="scroll-hint" (click)="scrollTo('#about')">
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>

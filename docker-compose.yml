@@ -1,0 +1,39 @@
+services:
+
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: portfolio-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      ALLOWED_ORIGINS: http://localhost,http://frontend
+    expose:
+      - "3000"
+    networks:
+      - portfolio-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: portfolio-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - portfolio-net
+
+networks:
+  portfolio-net:
+    driver: bridge

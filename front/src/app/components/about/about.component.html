@@ -1,0 +1,65 @@
+<section id="about" class="section about-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">about_me</p>
+      <h2>Sobre Mí</h2>
+      <div class="section-line"></div>
+    </div>
+
+    @if (profile(); as p) {
+      <div class="about-grid">
+
+        <div class="about-avatar-col">
+          <div class="avatar-wrapper">
+            <div class="avatar-frame">
+              <div class="avatar-placeholder">
+                <i class="fas fa-user-astronaut"></i>
+              </div>
+            </div>
+            <div class="avatar-badge mono">
+              <span class="text-green">&#x25cf;</span> Available for work
+            </div>
+          </div>
+        </div>
+
+        <div class="about-info-col">
+          <p class="about-tag mono text-green">&lt;AboutMe&gt;</p>
+
+          @for (paragraph of p.bio; track $index) {
+            <p class="about-paragraph">{{ paragraph }}</p>
+          }
+
+          <p class="about-tag mono text-green">&lt;/AboutMe&gt;</p>
+
+          <div class="about-details mono">
+            <div class="detail-item">
+              <span class="detail-key text-cyan">email</span>
+              <span class="detail-sep text-muted">:</span>
+              <a [href]="'mailto:' + p.email" class="detail-val text-green">{{ p.email }}</a>
+            </div>
+            <div class="detail-item">
+              <span class="detail-key text-cyan">location</span>
+              <span class="detail-sep text-muted">:</span>
+              <span class="detail-val">{{ p.location }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-key text-cyan">github</span>
+              <span class="detail-sep text-muted">:</span>
+              <a [href]="p.github" target="_blank" class="detail-val text-green">{{ p.github }}</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="stats-grid">
+        @for (stat of p.stats; track stat.label) {
+          <div class="stat-card card">
+            <span class="stat-value text-green mono">{{ stat.value }}</span>
+            <span class="stat-label text-muted">{{ stat.label }}</span>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

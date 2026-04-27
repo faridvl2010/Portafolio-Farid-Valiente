@@ -1,0 +1,47 @@
+<section id="projects" class="section projects-section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">my_projects</p>
+      <h2>Proyectos</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+      @for (project of projects(); track project.id) {
+        <div class="project-card card">
+          <div class="project-header">
+            <div class="project-icons">
+              <i class="fas fa-folder-open text-green"></i>
+              <div class="project-links">
+                <a [href]="project.github" target="_blank" class="icon-link" title="GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+                @if (project.demo) {
+                  <a [href]="project.demo" target="_blank" class="icon-link" title="Demo">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                }
+              </div>
+            </div>
+            <span class="project-status" [class]="statusClass(project.status)">
+              {{ project.status }}
+            </span>
+          </div>
+
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-desc">{{ project.description }}</p>
+
+          <div class="project-tech">
+            @for (tech of project.tech; track tech) {
+              <span class="tag">{{ tech }}</span>
+            }
+          </div>
+
+          <div class="project-footer mono text-muted">
+            <i class="fas fa-code-branch"></i> {{ project.year }}
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
