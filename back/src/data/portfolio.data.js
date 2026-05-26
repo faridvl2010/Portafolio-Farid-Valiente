@@ -6,7 +6,7 @@ const profile = {
   phone: '(57) 3023662207',
   location: 'Bogotá D.C., Colombia',
   github: 'https://github.com/faridvl2010',
-  linkedin: 'https://linkedin.com/in/farid-valiente',
+  linkedin: 'https://www.linkedin.com/in/farid-alexander-valiente-valbuena-051014275',
   bio: [
     'Ingeniero de Sistemas con más de 5 años de experiencia en desarrollo fullstack. Especializado en backend con Java, Spring Boot, .NET C# y Node.js, y frontend con Angular y React.',
     'Experto en integración de APIs REST y SOAP, gestión de bases de datos relacionales (MySQL, PostgreSQL, SQL Server) y despliegue en AWS y Azure.',
