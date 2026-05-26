@@ -13,10 +13,11 @@ const profile = {
     'Apasionado por la arquitectura hexagonal, microservicios y aseguramiento de calidad. Reconocido por entregar soluciones escalables con impacto directo en la productividad del negocio.'
   ],
   stats: [
-    { label: 'Años de Experiencia', value: '5+' },
-    { label: 'Empresas',            value: '4'  },
-    { label: 'Tecnologías',         value: '20+' },
-    { label: 'Proyectos',           value: '15+' }
+    { label: 'Años de Experiencia', value: '5+'   },
+    { label: 'Empresas',            value: '4'    },
+    { label: 'Tecnologías',         value: '20+'  },
+    { label: 'Proyectos',           value: '15+'  },
+    { label: 'Líneas de Código',    value: '127K+' }
   ]
 };
 

@@ -9,7 +9,7 @@
     <ul class="nav-links" [class.open]="menuOpen()">
       @for (link of links; track link.href) {
         <li>
-          <a class="nav-link mono" (click)="scrollTo(link.href)">
+          <a class="nav-link mono" [class.active]="isActive(link.href)" (click)="scrollTo(link.href)">
             <span class="text-green">./</span>{{ link.label }}
           </a>
         </li>

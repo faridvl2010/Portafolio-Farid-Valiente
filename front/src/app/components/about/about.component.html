@@ -34,7 +34,10 @@
             <div class="detail-item">
               <span class="detail-key text-cyan">email</span>
               <span class="text-muted px">:</span>
-              <a [href]="'mailto:' + p.email" class="detail-val text-green">{{ p.email }}</a>
+              <a [href]="'mailto:' + p.email"
+                 class="detail-val text-green copy-email"
+                 title="Click para copiar"
+                 (click)="copyEmail($event, p.email)">{{ p.email }} <i class="fas fa-copy"></i></a>
             </div>
             <div class="detail-item">
               <span class="detail-key text-cyan">location</span>

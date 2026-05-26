@@ -1,8 +1,12 @@
-import { Component, OnInit, AfterViewInit, OnDestroy, signal, inject, ElementRef } from '@angular/core';
+import {
+  Component, OnInit, AfterViewInit, OnDestroy,
+  signal, inject, ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PortfolioService } from '../../services/portfolio.service';
 import { Profile } from '../../models/portfolio.model';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-about',
@@ -13,7 +17,8 @@ import { RevealDirective } from '../../directives/reveal.directive';
 })
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly portfolioService = inject(PortfolioService);
-  private readonly host = inject(ElementRef);
+  private readonly host    = inject(ElementRef);
+  private readonly toast   = inject(ToastService);
 
   profile       = signal<Profile | null>(null);
   counterValues = signal<string[]>([]);
@@ -41,6 +46,13 @@ export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.observer?.disconnect();
+  }
+
+  copyEmail(e: Event, email: string) {
+    e.preventDefault();
+    navigator.clipboard.writeText(email).then(() => {
+      this.toast.show(`Email copiado: ${email}`, 'success');
+    });
   }
 
   private animateCounters() {

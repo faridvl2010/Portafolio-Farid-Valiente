@@ -1,0 +1,27 @@
+@if (visible()) {
+  <div class="boot-overlay" [class.fade-out]="finished()">
+    <div class="boot-terminal">
+      <div class="boot-bar mono">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span class="boot-title">portfolio.init</span>
+      </div>
+      <div class="boot-body mono">
+        @for (line of lines(); track $index) {
+          <p [class]="line.type">{{ line.text }}</p>
+        }
+        @if (!finished()) {
+          <span class="blink-cursor text-green">█</span>
+        }
+      </div>
+      <div class="boot-footer">
+        <div class="boot-track">
+          <div class="boot-progress" [style.width.%]="progress()"></div>
+        </div>
+        <span class="boot-pct mono text-green">{{ progress() }}%</span>
+        <button type="button" class="skip-btn mono" (click)="skip()">[&nbsp;skip&nbsp;]</button>
+      </div>
+    </div>
+  </div>
+}

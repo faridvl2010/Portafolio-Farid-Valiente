@@ -204,6 +204,48 @@ a {
 .neon-green { text-shadow: 0 0 10px rgba(0,255,136,0.6), 0 0 30px rgba(0,255,136,0.3); }
 .neon-cyan  { text-shadow: 0 0 10px rgba(0,212,255,0.6), 0 0 30px rgba(0,212,255,0.3); }
 
+/* ── Tag tooltips ────────────────────────────────────────────── */
+.tag[data-tooltip] {
+  position: relative;
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--bg-card-hover);
+    border: 1px solid var(--border-accent);
+    color: var(--text-primary);
+    font-size: 0.7rem;
+    white-space: nowrap;
+    padding: 0.25rem 0.55rem;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 200;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ── Custom cursor (desktop only) ───────────────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  label {
+    cursor: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .section { padding: 4rem 0; }
   .container { padding: 0 1.25rem; }

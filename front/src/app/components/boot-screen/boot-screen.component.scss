@@ -1,0 +1,117 @@
+.boot-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 99990;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+
+  &.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.boot-terminal {
+  width: min(600px, 92vw);
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius);
+  box-shadow: 0 0 60px rgba(0, 255, 136, 0.12), 0 32px 64px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+
+.boot-bar {
+  background: var(--bg-card-hover);
+  border-bottom: 1px solid var(--border);
+  padding: 0.55rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    &.r { background: #ff5f57; }
+    &.y { background: #ffbd2e; }
+    &.g { background: #28c840; }
+  }
+
+  .boot-title { margin-left: 0.5rem; }
+}
+
+.boot-body {
+  padding: 1.5rem;
+  min-height: 260px;
+  max-height: 340px;
+  overflow-y: auto;
+  font-size: 0.82rem;
+  line-height: 2;
+  color: var(--text-secondary);
+
+  p.cmd  { color: var(--text-secondary); }
+  p.ok   { color: var(--accent-green); }
+  p.warn { color: #ffbd2e; }
+  p.info { color: var(--accent-cyan); }
+}
+
+.blink-cursor {
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.boot-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.boot-track {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.boot-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+  border-radius: 2px;
+  transition: width 0.15s ease;
+  box-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+}
+
+.boot-pct {
+  font-size: 0.72rem;
+  min-width: 36px;
+  text-align: right;
+}
+
+.skip-btn {
+  background: none;
+  border: 1px solid var(--border-accent);
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--accent-green);
+    border-color: var(--accent-green);
+  }
+}

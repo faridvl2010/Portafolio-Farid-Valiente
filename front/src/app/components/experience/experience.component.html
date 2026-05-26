@@ -47,7 +47,7 @@
               </div>
               <ul class="tl-desc">@for(item of exp.description; track $index){<li>{{ item }}</li>}</ul>
               <div class="tl-tech">
-                @for (t of exp.tech; track t) { <span class="tag">{{ t }}</span> }
+                @for (t of exp.tech; track t) { <span class="tag" [attr.data-tooltip]="t">{{ t }}</span> }
               </div>
             </div>
           </div>

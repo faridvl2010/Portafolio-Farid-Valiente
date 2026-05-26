@@ -118,10 +118,25 @@
 .px         { color: var(--text-muted); margin: 0 0.2rem; }
 .detail-val { color: var(--text-primary); word-break: break-all; }
 
+.copy-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s;
+
+  i {
+    font-size: 0.72rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover i { opacity: 1; }
+}
+
 /* ── Stats ───────────────────────────────────────────────────── */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 1.25rem;
 }
 

@@ -1,0 +1,34 @@
+@if (open()) {
+  <div class="tw-panel">
+    <div class="tw-header mono">
+      <span class="dot r"></span>
+      <span class="dot y"></span>
+      <span class="dot g"></span>
+      <span class="tw-title">farid&#64;portfolio:~$</span>
+      <button type="button" class="tw-close" (click)="open.set(false)">–</button>
+    </div>
+    <div #termBody class="tw-body mono">
+      @for (line of history(); track $index) {
+        <p [class]="'l-' + line.type">{{ line.text }}</p>
+      }
+      <span class="tw-caret text-green">█</span>
+    </div>
+    <div class="tw-input mono">
+      <span class="text-green">$&nbsp;</span>
+      <input
+        #cmdInput
+        type="text"
+        [ngModel]="input()"
+        (ngModelChange)="input.set($event)"
+        (keydown)="onKey($event)"
+        placeholder="type a command..."
+        autocomplete="off"
+        spellcheck="false">
+    </div>
+  </div>
+}
+
+<button type="button" class="tw-fab mono" (click)="toggle()" [class.is-open]="open()">
+  <i class="fas fa-terminal"></i>
+  @if (!open()) { <span>terminal</span> }
+</button>
