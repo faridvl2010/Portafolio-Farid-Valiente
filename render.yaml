@@ -1,0 +1,26 @@
+services:
+  # ── Backend Node.js ────────────────────────────────────────────
+  - type: web
+    name: portfolio-api
+    runtime: docker
+    dockerfilePath: ./back/Dockerfile
+    dockerContext: ./back
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: ALLOWED_ORIGINS
+        value: https://TU-APP.vercel.app,https://TU-APP.onrender.com
+    healthCheckPath: /api/health
+
+  # ── Frontend Angular ───────────────────────────────────────────
+  - type: web
+    name: portfolio-web
+    runtime: static
+    buildCommand: cd front && npm ci && npm run build -- --configuration production
+    staticPublishPath: ./front/dist/portfolio/browser
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
