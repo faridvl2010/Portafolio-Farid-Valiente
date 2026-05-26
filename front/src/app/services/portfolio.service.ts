@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Profile, SkillCategory, Project, Experience, Education } from '../models/portfolio.model';
+import { Profile, SkillCategory, Project, Experience, Education, Certification } from '../models/portfolio.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -27,5 +27,9 @@ export class PortfolioService {
 
   getEducation(): Observable<Education[]> {
     return this.http.get<Education[]>(`${this.base}/education`);
+  }
+
+  getCertifications(): Observable<Certification[]> {
+    return this.http.get<Certification[]>(`${this.base}/certifications`);
   }
 }

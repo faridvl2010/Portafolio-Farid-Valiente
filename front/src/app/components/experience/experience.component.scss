@@ -6,6 +6,7 @@
   margin-bottom: 3rem;
   border-bottom: 1px solid var(--border);
   padding-bottom: 0;
+  flex-wrap: wrap;
 }
 
 .tab-btn {
@@ -31,10 +32,10 @@
   }
 }
 
+/* ── Timeline ─────────────────────────────────────────────────── */
 .timeline {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .timeline-item {
@@ -93,9 +94,7 @@
   margin-bottom: 0.25rem;
 }
 
-.tl-company {
-  font-size: 0.88rem;
-}
+.tl-company { font-size: 0.88rem; }
 
 .tl-meta {
   display: flex;
@@ -103,7 +102,6 @@
   align-items: flex-end;
   gap: 0.3rem;
   font-size: 0.78rem;
-
   i { margin-right: 0.3rem; }
 }
 
@@ -137,14 +135,60 @@
   gap: 0.4rem;
 }
 
+.tl-location {
+  font-size: 0.78rem;
+  i { margin-right: 0.3rem; }
+}
+
 .edu-desc {
   font-size: 0.9rem;
   color: var(--text-secondary);
   line-height: 1.7;
 }
 
+/* ── Certificaciones ──────────────────────────────────────────── */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.cert-card {
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.cert-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  padding-top: 0.1rem;
+}
+
+.cert-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cert-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.cert-institution { font-size: 0.85rem; }
+
+.cert-period {
+  font-size: 0.78rem;
+  i { margin-right: 0.3rem; }
+}
+
 @media (max-width: 640px) {
   .timeline-item { grid-template-columns: 24px 1fr; gap: 1rem; }
   .tl-header { flex-direction: column; }
   .tl-meta { align-items: flex-start; }
+  .certs-grid { grid-template-columns: 1fr; }
 }

@@ -7,22 +7,21 @@
     </div>
 
     <div class="tab-bar mono">
-      <button
-        class="tab-btn"
-        [class.active]="activeTab() === 'experience'"
-        (click)="activeTab.set('experience')"
-      >
+      <button type="button" class="tab-btn" [class.active]="activeTab() === 'experience'"
+        (click)="activeTab.set('experience')">
         <i class="fas fa-briefcase"></i> Experiencia
       </button>
-      <button
-        class="tab-btn"
-        [class.active]="activeTab() === 'education'"
-        (click)="activeTab.set('education')"
-      >
+      <button type="button" class="tab-btn" [class.active]="activeTab() === 'education'"
+        (click)="activeTab.set('education')">
         <i class="fas fa-graduation-cap"></i> Educación
+      </button>
+      <button type="button" class="tab-btn" [class.active]="activeTab() === 'certifications'"
+        (click)="activeTab.set('certifications')">
+        <i class="fas fa-certificate"></i> Certificaciones
       </button>
     </div>
 
+    <!-- EXPERIENCIA -->
     @if (activeTab() === 'experience') {
       <div class="timeline">
         @for (exp of experience(); track exp.id) {
@@ -48,11 +47,9 @@
                   </span>
                 </div>
               </div>
-              <ul class="tl-desc">
-                @for (item of exp.description; track $index) {
+              <ul class="tl-desc">@for (item of exp.description; track $index) {
                   <li>{{ item }}</li>
-                }
-              </ul>
+                }</ul>
               <div class="tl-tech">
                 @for (t of exp.tech; track t) {
                   <span class="tag">{{ t }}</span>
@@ -64,6 +61,7 @@
       </div>
     }
 
+    <!-- EDUCACIÓN -->
     @if (activeTab() === 'education') {
       <div class="timeline">
         @for (edu of education(); track edu.id) {
@@ -83,16 +81,43 @@
                     <i class="fas fa-calendar-alt"></i>
                     {{ edu.period.start }} — {{ edu.period.end }}
                   </span>
-                  <span class="tl-gpa mono text-green">
-                    <i class="fas fa-star"></i> GPA {{ edu.gpa }}
-                  </span>
+                  @if (edu.gpa) {
+                    <span class="tl-gpa mono text-green">
+                      <i class="fas fa-star"></i> GPA {{ edu.gpa }}
+                    </span>
+                  }
                 </div>
               </div>
               <p class="edu-desc">{{ edu.description }}</p>
+              <p class="tl-location mono text-muted">
+                <i class="fas fa-map-marker-alt"></i> {{ edu.location }}
+              </p>
             </div>
           </div>
         }
       </div>
     }
+
+    <!-- CERTIFICACIONES -->
+    @if (activeTab() === 'certifications') {
+      <div class="certs-grid">
+        @for (cert of certifications(); track cert.id) {
+          <div class="cert-card card">
+            <div class="cert-icon">
+              <i class="fas fa-certificate text-green"></i>
+            </div>
+            <div class="cert-info">
+              <h3 class="cert-title">{{ cert.title }}</h3>
+              <p class="cert-institution text-cyan mono">{{ cert.institution }}</p>
+              <p class="cert-period mono text-muted">
+                <i class="fas fa-calendar-alt"></i>
+                {{ cert.period.start }} — {{ cert.period.end }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
   </div>
 </section>

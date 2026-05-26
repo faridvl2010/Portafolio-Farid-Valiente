@@ -8,6 +8,7 @@ export interface Profile {
   title: string;
   subtitle: string;
   email: string;
+  phone?: string;
   location: string;
   github: string;
   linkedin: string;
@@ -60,5 +61,12 @@ export interface Education {
   period: ExperiencePeriod;
   location: string;
   description: string;
-  gpa: string;
+  gpa: string | null;
+}
+
+export interface Certification {
+  id: number;
+  title: string;
+  institution: string;
+  period: ExperiencePeriod;
 }
