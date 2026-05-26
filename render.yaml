@@ -2,19 +2,17 @@ services:
   # ── Backend Node.js ────────────────────────────────────────────
   - type: web
     name: portfolio-api
-    runtime: docker
-    dockerfilePath: ./back/Dockerfile
-    dockerContext: ./back
+    runtime: node
+    rootDir: back
+    buildCommand: npm install
+    startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
       - key: ALLOWED_ORIGINS
-        value: https://TU-APP.vercel.app,https://TU-APP.onrender.com
-    healthCheckPath: /api/health
+        value: https://portafolio-farid-valiente.vercel.app
 
-  # ── Frontend Angular ───────────────────────────────────────────
+  # ── Frontend Angular (static) ──────────────────────────────────
   - type: web
     name: portfolio-web
     runtime: static
