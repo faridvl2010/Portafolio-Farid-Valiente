@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+front/node_modules/
+back/node_modules/
+
+# Angular build output & cache
+front/dist/
+front/.angular/
+
+# Environment files
+front/src/environments/environment.local.ts
+back/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
