@@ -1,5 +1,17 @@
 :host { display: block; }
 
+/* ── Matrix canvas ──────────────────────────────────────────── */
+.matrix-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Hero shell ─────────────────────────────────────────────── */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -13,22 +25,57 @@
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,255,136,0.06) 0%, transparent 70%),
-              radial-gradient(ellipse 60% 50% at 90% 50%, rgba(0,212,255,0.04) 0%, transparent 60%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .grid-overlay {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(42,42,58,0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(42,42,58,0.4) 1px, transparent 1px);
+    linear-gradient(rgba(42,42,58,0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42,42,58,0.35) 1px, transparent 1px);
   background-size: 50px 50px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
 }
 
+/* ── Floating orbs ──────────────────────────────────────────── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+.orb-1 {
+  width: 500px; height: 500px;
+  background: rgba(0,255,136,0.07);
+  top: -10%; left: -5%;
+  animation: orbFloat 10s ease-in-out infinite;
+}
+.orb-2 {
+  width: 400px; height: 400px;
+  background: rgba(0,212,255,0.05);
+  bottom: -10%; right: -5%;
+  animation: orbFloat 13s ease-in-out infinite reverse;
+}
+.orb-3 {
+  width: 300px; height: 300px;
+  background: rgba(157,78,221,0.04);
+  top: 40%; right: 20%;
+  animation: orbFloat 8s ease-in-out infinite 2s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0,0); }
+  33%       { transform: translate(20px,-25px); }
+  66%       { transform: translate(-15px, 15px); }
+}
+
+/* ── Layout ─────────────────────────────────────────────────── */
 .hero-content {
   position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
@@ -37,41 +84,38 @@
   padding-bottom: 4rem;
 }
 
+/* ── Terminal header ─────────────────────────────────────────── */
 .terminal-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1.75rem;
   background: var(--bg-card);
   border: 1px solid var(--border);
+  border-bottom: none;
   border-radius: 8px 8px 0 0;
-  padding: 0.6rem 1rem;
+  padding: 0.55rem 1rem;
   width: fit-content;
+  margin-bottom: 0;
 
   .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
+    width: 11px; height: 11px; border-radius: 50%;
     &.red    { background: #ff5f57; }
     &.yellow { background: #ffbd2e; }
     &.green  { background: #28c840; }
   }
-
-  .terminal-title {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-left: 0.5rem;
-  }
+  .terminal-title { font-size: 0.78rem; color: var(--text-muted); margin-left: 0.4rem; }
 }
 
 .hero-greeting {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   margin-bottom: 1rem;
-  opacity: 0.7;
+  margin-top: 0.75rem;
+  opacity: 0.65;
 }
 
+/* ── Glitch name ────────────────────────────────────────────── */
 .hero-name {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.6rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -80,19 +124,37 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1rem;
+  animation: nameGlitch 7s infinite;
 }
 
+@keyframes nameGlitch {
+  0%, 88%, 96%, 100% { transform: none; filter: none; }
+  89% {
+    transform: skew(-1.5deg) translateX(3px);
+    filter: drop-shadow(-3px 0 rgba(0,212,255,0.75)) drop-shadow(3px 0 rgba(255,71,87,0.5));
+  }
+  90% {
+    transform: skew(1deg) translateX(-2px);
+    filter: drop-shadow(2px 0 rgba(0,255,136,0.6));
+  }
+  91% { transform: none; filter: none; }
+  94% {
+    transform: translateX(-1px);
+    filter: drop-shadow(1px 0 rgba(0,212,255,0.4));
+  }
+  95% { transform: none; filter: none; }
+}
+
+/* ── Role typing ────────────────────────────────────────────── */
 .hero-role {
   font-family: var(--font-mono);
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
   font-weight: 500;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   min-height: 2rem;
 }
-
 .typed-text { color: var(--accent-cyan); }
-
 .cursor {
   color: var(--accent-green);
   opacity: 0;
@@ -101,73 +163,118 @@
 }
 
 .hero-desc {
-  font-size: 1rem;
+  font-size: 0.97rem;
   color: var(--text-secondary);
   max-width: 480px;
-  line-height: 1.7;
-  margin-bottom: 0.85rem;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
 }
 
-.hero-location {
-  font-size: 0.85rem;
+/* ── Badges ─────────────────────────────────────────────────── */
+.hero-badges {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
   margin-bottom: 2rem;
-  i { margin-right: 0.4rem; }
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  i { font-size: 0.7rem; }
+
+  &.available {
+    border-color: rgba(0,255,136,0.35);
+    color: var(--accent-green);
+    background: rgba(0,255,136,0.07);
+  }
 }
 
+.pulse-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent-green);
+  display: inline-block;
+  animation: pulseGlow 1.8s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.6); }
+  50%       { box-shadow: 0 0 0 5px rgba(0,255,136,0); }
+}
+
+/* ── Actions ─────────────────────────────────────────────────── */
 .hero-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
 }
 
+/* ── Code block ──────────────────────────────────────────────── */
 .hero-code-block {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.75rem;
-  font-size: 0.9rem;
-  line-height: 1.8;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow-green);
-
-  pre { overflow: visible; }
-
-  .kw   { color: #c792ea; }
-  .var  { color: var(--accent-cyan); }
-  .str  { color: var(--accent-green); }
-  .key  { color: #82aaff; }
-  .bool { color: #f78c6c; }
-  .cm   { color: var(--text-muted); }
+  font-size: 0.88rem;
+  line-height: 1.85;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.45), var(--glow-green);
+  overflow: hidden;
+  animation: codeFloat 6s ease-in-out infinite;
 }
 
+@keyframes codeFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  background: var(--bg-card-hover);
+  border-bottom: 1px solid var(--border);
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .code-title { margin-left: 0.5rem; font-size: 0.78rem; }
+}
+
+pre { padding: 1.5rem; overflow: visible; }
+
+.kw   { color: #c792ea; }
+.var  { color: var(--accent-cyan); }
+.cls  { color: #ffcb6b; }
+.str  { color: var(--accent-green); }
+.key  { color: #82aaff; }
+.num  { color: #f78c6c; }
+.bool { color: #f78c6c; }
+.pun  { color: var(--text-muted); }
+.cm   { color: #546e7a; }
+
+/* ── Scroll hint ─────────────────────────────────────────────── */
 .scroll-hint {
   position: absolute;
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
   color: var(--text-muted);
   font-size: 1.1rem;
   cursor: pointer;
-  animation: bounce 2s infinite;
+  animation: bounce 2.2s infinite;
   &:hover { color: var(--accent-green); }
 }
-
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(8px); }
+  50%       { transform: translateX(-50%) translateY(9px); }
 }
 
 @media (max-width: 900px) {
-  .hero-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  .hero-role, .hero-desc, .hero-location { text-align: center; }
-  .hero-actions { justify-content: center; }
-  .terminal-header { margin: 0 auto 1.75rem; }
-  .hero-name {
-    background: linear-gradient(135deg, var(--text-primary) 40%, var(--accent-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .hero-content { grid-template-columns: 1fr; text-align: center; }
+  .hero-role, .hero-desc { text-align: center; }
+  .hero-badges, .hero-actions { justify-content: center; }
+  .terminal-header { margin: 0 auto; }
 }

@@ -2,11 +2,12 @@ import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PortfolioService } from '../../services/portfolio.service';
 import { Project } from '../../models/portfolio.model';
+import { RevealDirective } from '../../directives/reveal.directive';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RevealDirective],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.scss',
 })

@@ -1,25 +1,27 @@
 <section id="hero" class="hero">
+
+  <canvas #matrixCanvas class="matrix-canvas"></canvas>
+
   <div class="hero-bg">
     <div class="grid-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
 
   <div class="container hero-content">
-    <div class="terminal-header mono">
-      <span class="dot red"></span>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-      <span class="terminal-title">farid&#64;portfolio:~$</span>
-    </div>
-
     <div class="hero-text">
+      <div class="terminal-header mono">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">farid&#64;portfolio:~$</span>
+      </div>
+
       <p class="hero-greeting mono text-muted">// Bienvenido a mi portafolio</p>
 
-      <h1 class="hero-name">
-        @if (profile()) {
-          {{ profile()!.name }}
-        } @else {
-          Farid Valiente
-        }
+      <h1 class="hero-name glitch" [attr.data-text]="profile()?.name ?? 'Farid Alexander Valiente'">
+        @if (profile()) { {{ profile()!.name }} } @else { Farid Alexander Valiente }
       </h1>
 
       <h2 class="hero-role">
@@ -29,36 +31,46 @@
       </h2>
 
       <p class="hero-desc">
-        @if (profile()) {
-          {{ profile()!.bio[0] }}
-        } @else {
-          Construyendo soluciones tecnológicas robustas y escalables.
-        }
+        @if (profile()) { {{ profile()!.bio[0] }} }
+        @else { Construyendo soluciones tecnológicas robustas y escalables. }
       </p>
 
-      <div class="hero-location mono text-muted" *ngIf="profile()">
-        <i class="fas fa-map-marker-alt text-green"></i>
-        {{ profile()!.location }}
+      <div class="hero-badges mono">
+        <span class="badge"><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</span>
+        <span class="badge available"><span class="pulse-dot"></span> Disponible</span>
       </div>
 
       <div class="hero-actions">
-        <button class="btn btn-primary" (click)="scrollTo('#projects')">
+        <button type="button" class="btn btn-primary" (click)="scrollTo('#projects')">
           <i class="fas fa-code"></i> Ver Proyectos
         </button>
-        <button class="btn btn-outline" (click)="scrollTo('#contact')">
+        <button type="button" class="btn btn-outline" (click)="scrollTo('#contact')">
           <i class="fas fa-terminal"></i> Contactar
         </button>
+        @if (profile()) {
+          <a [href]="profile()!.github" target="_blank" class="btn btn-ghost">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+        }
       </div>
     </div>
 
     <div class="hero-code-block mono">
-      <pre><code><span class="kw">const</span> <span class="var">developer</span> = &#123;
-  <span class="key">name</span>:     <span class="str">"Farid Valiente"</span>,
-  <span class="key">role</span>:     <span class="str">"Ing. Sistemas"</span>,
-  <span class="key">stack</span>:    [<span class="str">"Angular"</span>, <span class="str">"Node.js"</span>],
-  <span class="key">passion</span>: <span class="str">"Clean Code"</span>,
-  <span class="key">status</span>:  <span class="bool">true</span> <span class="cm">// available</span>
-&#125;;</code></pre>
+      <div class="code-header">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="code-title text-muted">developer.ts</span>
+      </div>
+      <pre><code><span class="kw">const</span> <span class="var">developer</span><span class="pun">: </span><span class="cls">Engineer</span> <span class="pun">=</span> &#123;
+  <span class="key">name</span><span class="pun">:</span>       <span class="str">"Farid Valiente"</span><span class="pun">,</span>
+  <span class="key">role</span><span class="pun">:</span>       <span class="str">"Fullstack Senior"</span><span class="pun">,</span>
+  <span class="key">experience</span><span class="pun">:</span> <span class="num">5</span><span class="pun">,</span>
+  <span class="key">stack</span><span class="pun">:</span>      <span class="pun">[</span>
+    <span class="str">"Angular"</span><span class="pun">,</span> <span class="str">"Node.js"</span><span class="pun">,</span>
+    <span class="str">"Spring Boot"</span><span class="pun">,</span> <span class="str">"AWS"</span>
+  <span class="pun">],</span>
+  <span class="key">architecture</span><span class="pun">:</span> <span class="str">"Hexagonal"</span><span class="pun">,</span>
+  <span class="key">available</span><span class="pun">:</span> <span class="bool">true</span> <span class="cm">// open to work</span>
+&#125;<span class="pun">;</span></code></pre>
     </div>
   </div>
 

@@ -1,21 +1,19 @@
 <section id="skills" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" appReveal [revealDelay]="0">
       <p class="section-label">tech_stack</p>
       <h2>Habilidades &amp; Tecnologías</h2>
       <div class="section-line"></div>
     </div>
 
     <div class="skills-grid">
-      @for (cat of skills(); track cat.category) {
-        <div class="skill-category card">
+      @for (cat of skills(); track cat.category; let i = $index) {
+        <div class="skill-category card" appReveal [revealDelay]="i * 80">
           <div class="cat-header">
             <span class="cat-icon mono text-green">{{ cat.icon }}</span>
             <h3 class="cat-title">{{ cat.category }}</h3>
           </div>
-          <ul class="skill-list">
-            @for (skill of cat.items; track skill.name) {
-              <li class="skill-item">
+          <ul class="skill-list">@for(skill of cat.items; track skill.name){<li class="skill-item">
                 <div class="skill-meta">
                   <span class="skill-name mono">{{ skill.name }}</span>
                   <span class="skill-pct mono text-muted">{{ skill.level }}%</span>
@@ -24,12 +22,10 @@
                   <div
                     class="skill-fill"
                     [class]="levelClass(skill.level)"
-                    [style.width.%]="skill.level"
+                    [style.width]="animated() ? skill.level + '%' : '0%'"
                   ></div>
                 </div>
-              </li>
-            }
-          </ul>
+              </li>}</ul>
         </div>
       }
     </div>

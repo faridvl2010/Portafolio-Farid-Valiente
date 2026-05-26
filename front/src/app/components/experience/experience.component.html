@@ -1,12 +1,12 @@
 <section id="experience" class="section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" appReveal [revealDelay]="0">
       <p class="section-label">career_path</p>
       <h2>Experiencia &amp; Educación</h2>
       <div class="section-line"></div>
     </div>
 
-    <div class="tab-bar mono">
+    <div class="tab-bar mono" appReveal [revealDelay]="100">
       <button type="button" class="tab-btn" [class.active]="activeTab() === 'experience'"
         (click)="activeTab.set('experience')">
         <i class="fas fa-briefcase"></i> Experiencia
@@ -21,11 +21,10 @@
       </button>
     </div>
 
-    <!-- EXPERIENCIA -->
     @if (activeTab() === 'experience') {
       <div class="timeline">
-        @for (exp of experience(); track exp.id) {
-          <div class="timeline-item">
+        @for (exp of experience(); track exp.id; let i = $index) {
+          <div class="timeline-item" appReveal [revealDelay]="i * 120">
             <div class="timeline-marker">
               <div class="marker-dot"></div>
               <div class="marker-line"></div>
@@ -42,18 +41,13 @@
                     {{ exp.period.start }} — {{ exp.period.end }}
                   </span>
                   <span class="tl-location mono text-muted">
-                    <i class="fas fa-map-marker-alt"></i>
-                    {{ exp.location }}
+                    <i class="fas fa-map-marker-alt"></i> {{ exp.location }}
                   </span>
                 </div>
               </div>
-              <ul class="tl-desc">@for (item of exp.description; track $index) {
-                  <li>{{ item }}</li>
-                }</ul>
+              <ul class="tl-desc">@for(item of exp.description; track $index){<li>{{ item }}</li>}</ul>
               <div class="tl-tech">
-                @for (t of exp.tech; track t) {
-                  <span class="tag">{{ t }}</span>
-                }
+                @for (t of exp.tech; track t) { <span class="tag">{{ t }}</span> }
               </div>
             </div>
           </div>
@@ -61,11 +55,10 @@
       </div>
     }
 
-    <!-- EDUCACIÓN -->
     @if (activeTab() === 'education') {
       <div class="timeline">
-        @for (edu of education(); track edu.id) {
-          <div class="timeline-item">
+        @for (edu of education(); track edu.id; let i = $index) {
+          <div class="timeline-item" appReveal [revealDelay]="i * 120">
             <div class="timeline-marker">
               <div class="marker-dot"></div>
               <div class="marker-line"></div>
@@ -82,9 +75,7 @@
                     {{ edu.period.start }} — {{ edu.period.end }}
                   </span>
                   @if (edu.gpa) {
-                    <span class="tl-gpa mono text-green">
-                      <i class="fas fa-star"></i> GPA {{ edu.gpa }}
-                    </span>
+                    <span class="mono text-green"><i class="fas fa-star"></i> GPA {{ edu.gpa }}</span>
                   }
                 </div>
               </div>
@@ -98,14 +89,11 @@
       </div>
     }
 
-    <!-- CERTIFICACIONES -->
     @if (activeTab() === 'certifications') {
       <div class="certs-grid">
-        @for (cert of certifications(); track cert.id) {
-          <div class="cert-card card">
-            <div class="cert-icon">
-              <i class="fas fa-certificate text-green"></i>
-            </div>
+        @for (cert of certifications(); track cert.id; let i = $index) {
+          <div class="cert-card card" appReveal [revealDelay]="i * 100">
+            <div class="cert-icon"><i class="fas fa-certificate text-green"></i></div>
             <div class="cert-info">
               <h3 class="cert-title">{{ cert.title }}</h3>
               <p class="cert-institution text-cyan mono">{{ cert.institution }}</p>
@@ -118,6 +106,5 @@
         }
       </div>
     }
-
   </div>
 </section>

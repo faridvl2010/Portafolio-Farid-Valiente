@@ -17,6 +17,29 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  &:hover {
+    border-color: rgba(0,255,136,0.3);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,255,136,0.08);
+    transform: translateY(-6px);
+
+    &::before { transform: scaleX(1); }
+    .folder-icon { color: var(--accent-cyan); }
+  }
 }
 
 .project-header {
@@ -29,8 +52,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
 
-  i.fa-folder-open { font-size: 1.6rem; }
+.folder-icon {
+  font-size: 1.6rem;
+  transition: color 0.3s;
 }
 
 .project-links {
@@ -41,8 +67,11 @@
 .icon-link {
   color: var(--text-muted);
   font-size: 1rem;
-  transition: color 0.25s;
-  &:hover { color: var(--accent-green); }
+  transition: color 0.25s, transform 0.25s;
+  &:hover {
+    color: var(--accent-green);
+    transform: translateY(-2px);
+  }
 }
 
 .project-status {
@@ -59,7 +88,7 @@
 }
 
 .project-title {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
   line-height: 1.3;

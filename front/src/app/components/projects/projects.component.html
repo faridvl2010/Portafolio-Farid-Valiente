@@ -1,17 +1,17 @@
 <section id="projects" class="section projects-section">
   <div class="container">
-    <div class="section-header">
+    <div class="section-header" appReveal [revealDelay]="0">
       <p class="section-label">my_projects</p>
       <h2>Proyectos</h2>
       <div class="section-line"></div>
     </div>
 
     <div class="projects-grid">
-      @for (project of projects(); track project.id) {
-        <div class="project-card card">
+      @for (project of projects(); track project.id; let i = $index) {
+        <div class="project-card card" appReveal [revealDelay]="i * 100">
           <div class="project-header">
             <div class="project-icons">
-              <i class="fas fa-folder-open text-green"></i>
+              <i class="fas fa-folder-open text-green folder-icon"></i>
               <div class="project-links">
                 <a [href]="project.github" target="_blank" class="icon-link" title="GitHub">
                   <i class="fab fa-github"></i>
